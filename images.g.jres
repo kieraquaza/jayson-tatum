@@ -1,0 +1,22 @@
+{
+    "G(D-+/aEkFP:nngTa": {
+        "data": "hwQOAA4AAADOzO/+DwAAAP47+//7//8A/r/z9S/7/wDA//9/L/8PAAD///8r/w8AAL///yv//wDA//9/L///AP6/8/Uvvw8A/jv7/7L/DwDOzO/+v/v/AAAAAADw+/8AAAAA+//xAAAAAAAfEfsAAAAAAPv/DwAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "Meatball"
+    },
+    "image1": {
+        "data": "hwQMABAAAAAA8P//D+BEAAD//0T+T00A8P//TuT//wDw/kT03RER/+9ORPTdURH/7+5ERL1VVQ/v7k5EvVVVD+/u7vTdURH/8P7v9N0REf/w//9O5P//AAD//0T+T00AAPD//w/gRAA=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage"
+    },
+    "image2": {
+        "data": "hwQQABAAAAAAAAAAu8wAAAAAALC9vQwAAAAAsN3czQAAAACwXcW9DAAAu9tb1dwMALBbVVtV3AwAu1VVvVXbDABbHV1Vvd0MAFvxX1VV1QywW/9bVFVVDFtbVU1UVVUMtVvVTVRVVQsLsE1EVFW1CwAAz0S0Vb0AAAAAQAu7CwAAAACwAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage0"
+    },
+    "*": {
+        "mimeType": "image/x-mkcd-f4",
+        "dataEncoding": "base64",
+        "namespace": "myImages"
+    }
+}
