@@ -620,7 +620,6 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorClosedSouth, function
         500,
         true
         )
-        tiles.placeOnRandomTile(mySprite4, sprites.castle.tilePath5)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.forestTiles11, function (sprite, location) {
@@ -1109,8 +1108,12 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorOpenNorth, function (
         true
         )
         tiles.placeOnRandomTile(mySprite4, sprites.castle.tilePath5)
+        tiles.placeOnRandomTile(mySprite4, sprites.castle.tilePath5)
+        mySprite12 = sprites.create(assets.image`Monster`, SpriteKind.Enemy)
+        tiles.placeOnRandomTile(mySprite12, sprites.dungeon.darkGroundCenter)
     }
 })
+let mySprite12: Sprite = null
 let mySprite10: Sprite = null
 let mySprite9: Sprite = null
 let mySprite8: Sprite = null
@@ -1171,6 +1174,7 @@ game.onUpdate(function () {
     if (level != 0) {
         sprites.destroy(mySprite2)
         sprites.destroy(mySprite4)
+        sprites.destroy(mySprite12)
     }
     if (level != 6) {
         sprites.destroy(mySprite3)
