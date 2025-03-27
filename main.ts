@@ -1,26 +1,6 @@
 namespace SpriteKind {
     export const NPC = SpriteKind.create()
 }
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
-    if (level == 0) {
-        tiles.setCurrentTilemap(maps[4])
-        sprites.destroy(mySprite2)
-        sprites.destroy(mySprite4)
-        level = 4
-        mySprite.setPosition(125, 230)
-    }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
-    if (level == 2) {
-        tiles.setCurrentTilemap(maps[7])
-        level = 7
-        mySprite7 = sprites.create(assets.image`myImage`, SpriteKind.NPC)
-        tiles.placeOnRandomTile(mySprite7, sprites.builtin.brick)
-        mySprite11 = sprites.create(assets.image`myImage0`, SpriteKind.NPC)
-        tiles.placeOnRandomTile(mySprite11, sprites.builtin.brick)
-        mySprite.setPosition(125, 230)
-    }
-})
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorOpenSouth, function (sprite, location) {
     if (level == 5) {
         tiles.setCurrentTilemap(maps[0])
@@ -117,7 +97,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorOpenSouth, function (
         500,
         true
         )
-        tiles.placeOnRandomTile(mySprite2, sprites.castle.tilePath5)
+        tiles.placeOnTile(mySprite2, tiles.getTileLocation(2, 8))
         mySprite4 = sprites.create(img`
             . . . . . . 5 . 5 . . . . . . . 
             . . . . . f 5 5 5 f f . . . . . 
@@ -193,8 +173,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorOpenSouth, function (
         500,
         true
         )
-        tiles.placeOnRandomTile(mySprite4, sprites.castle.tilePath5)
         mySprite.setPosition(175, 50)
+        tiles.placeOnTile(mySprite4, tiles.getTileLocation(4, 2))
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
@@ -238,95 +218,27 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSpri
             mySprite11.sayText("Quack", 1000, true)
         })
     }
+    if (otherSprite == mySprite2) {
+        timer.throttle("action", 1000, function () {
+            mySprite2.sayText("My hosue is underconstruction", 5000, true)
+        })
+    }
+    if (otherSprite == mySprite4) {
+        timer.throttle("action", 1000, function () {
+            mySprite4.sayText("Stop trying to get in my house. YOU CREEP!!!", 5000, true)
+        })
+    }
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, myTiles.tile2, function (sprite, location) {
     if (level == 0) {
-        tiles.setCurrentTilemap(maps[5])
+        tiles.setCurrentTilemap(maps[4])
         sprites.destroy(mySprite2)
-        level = 5
         sprites.destroy(mySprite4)
-        mySprite8 = sprites.create(img`
-            . . . . f f f f . . . . 
-            . . f f e e e e f f . . 
-            . f f e e e e e e f f . 
-            f f f f 4 e e e f f f f 
-            f f f 4 4 4 e e f f f f 
-            f f f 4 4 4 4 e e f f f 
-            f 4 e 4 4 4 4 4 4 e 4 f 
-            f 4 4 f f 4 4 f f 4 4 f 
-            f e 4 d d d d d d 4 e f 
-            . f e d d b b d d e f . 
-            . f f e 4 4 4 4 e f f . 
-            e 4 f b 1 1 1 1 b f 4 e 
-            4 d f 1 1 1 1 1 1 f d 4 
-            4 4 f 6 6 6 6 6 6 f 4 4 
-            . . . f f f f f f . . . 
-            . . . f f . . f f . . . 
-            `, SpriteKind.NPC)
-        tiles.placeOnRandomTile(mySprite8, assets.tile`myTile3`)
-        mySprite10 = sprites.create(img`
-            . . . . c c c c c c . . . . . . 
-            . . . c 6 7 7 7 7 6 c . . . . . 
-            . . c 7 7 7 7 7 7 7 7 c . . . . 
-            . c 6 7 7 7 7 7 7 7 7 6 c . . . 
-            . c 7 c 6 6 6 6 c 7 7 7 c . . . 
-            . f 7 6 f 6 6 f 6 7 7 7 f . . . 
-            . f 7 7 7 7 7 7 7 7 7 7 f . . . 
-            . . f 7 7 7 7 6 c 7 7 6 f c . . 
-            . . . f c c c c 7 7 6 f 7 7 c . 
-            . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
-            . c 7 7 2 7 7 c f c 6 7 7 6 c c 
-            c 1 1 1 1 7 6 f c c 6 6 6 c . . 
-            f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
-            f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
-            . f 6 1 1 1 1 1 1 6 6 6 f . . . 
-            . . c c c c c c c c c f . . . . 
-            `, SpriteKind.NPC)
-        tiles.placeOnRandomTile(mySprite10, assets.tile`myTile3`)
-        animation.runImageAnimation(
-        mySprite10,
-        [img`
-            . . . . c c c c c c . . . . . . 
-            . . . c 6 7 7 7 7 6 c . . . . . 
-            . . c 7 7 7 7 7 7 7 7 c . . . . 
-            . c 6 7 7 7 7 7 7 7 7 6 c . . . 
-            . c 7 c 6 6 6 6 c 7 7 7 c . . . 
-            . f 7 6 f 6 6 f 6 7 7 7 f . . . 
-            . f 7 7 7 7 7 7 7 7 7 7 f . . . 
-            . . f 7 7 7 7 6 c 7 7 6 f c . . 
-            . . . f c c c c 7 7 6 f 7 7 c . 
-            . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
-            . c 7 7 2 7 7 c f c 6 7 7 6 c c 
-            c 1 1 1 1 7 6 f c c 6 6 6 c . . 
-            f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
-            f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
-            . f 6 1 1 1 1 1 1 6 6 6 f . . . 
-            . . c c c c c c c c c f . . . . 
-            `,img`
-            . . . c c c c c c . . . . . . . 
-            . . c 6 7 7 7 7 6 c . . . . . . 
-            . c 7 7 7 7 7 7 7 7 c . . . . . 
-            c 6 7 7 7 7 7 7 7 7 6 c . . . . 
-            c 7 c 6 6 6 6 c 7 7 7 c . . . . 
-            f 7 6 f 6 6 f 6 7 7 7 f . . . . 
-            f 7 7 7 7 7 7 7 7 7 7 f . . . . 
-            . f 7 7 7 7 6 c 7 7 6 f . . . . 
-            . . f c c c c 7 7 6 f c c c . . 
-            . . c 6 2 7 7 7 f c c 7 7 7 c . 
-            . c 6 7 7 2 7 7 c f 6 7 7 7 7 c 
-            . c 1 1 1 1 7 6 6 c 6 6 6 c c c 
-            . c 1 1 1 1 1 6 6 6 6 6 6 c . . 
-            . c 6 1 1 1 1 1 6 6 6 6 6 c . . 
-            . . c 6 1 1 1 1 1 7 6 6 c c . . 
-            . . . c c c c c c c c c c . . . 
-            `],
-        100,
-        true
-        )
+        level = 4
         mySprite.setPosition(125, 230)
     }
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile4`, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, myTiles.tile11, function (sprite, location) {
     if (level == 0) {
         tiles.setCurrentTilemap(maps[3])
         sprites.destroy(mySprite2)
@@ -440,11 +352,101 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorClosedNorth, function
         mySprite.setPosition(77, 130)
     }
 })
+statusbars.onStatusReached(StatusBarKind.Health, statusbars.StatusComparison.EQ, statusbars.ComparisonType.Percentage, 0, function (status) {
+    game.gameOver(false)
+})
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.oceanDepths9, function (sprite, location) {
     if (level == 2) {
         tiles.setCurrentTilemap(maps[1])
         mySprite.setPosition(31, 50)
         level = 1
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, myTiles.tile1, function (sprite, location) {
+    if (level == 0) {
+        tiles.setCurrentTilemap(maps[5])
+        sprites.destroy(mySprite2)
+        level = 5
+        sprites.destroy(mySprite4)
+        mySprite8 = sprites.create(img`
+            . . . . f f f f . . . . 
+            . . f f e e e e f f . . 
+            . f f e e e e e e f f . 
+            f f f f 4 e e e f f f f 
+            f f f 4 4 4 e e f f f f 
+            f f f 4 4 4 4 e e f f f 
+            f 4 e 4 4 4 4 4 4 e 4 f 
+            f 4 4 f f 4 4 f f 4 4 f 
+            f e 4 d d d d d d 4 e f 
+            . f e d d b b d d e f . 
+            . f f e 4 4 4 4 e f f . 
+            e 4 f b 1 1 1 1 b f 4 e 
+            4 d f 1 1 1 1 1 1 f d 4 
+            4 4 f 6 6 6 6 6 6 f 4 4 
+            . . . f f f f f f . . . 
+            . . . f f . . f f . . . 
+            `, SpriteKind.NPC)
+        tiles.placeOnRandomTile(mySprite8, myTiles.tile7)
+        mySprite10 = sprites.create(img`
+            . . . . c c c c c c . . . . . . 
+            . . . c 6 7 7 7 7 6 c . . . . . 
+            . . c 7 7 7 7 7 7 7 7 c . . . . 
+            . c 6 7 7 7 7 7 7 7 7 6 c . . . 
+            . c 7 c 6 6 6 6 c 7 7 7 c . . . 
+            . f 7 6 f 6 6 f 6 7 7 7 f . . . 
+            . f 7 7 7 7 7 7 7 7 7 7 f . . . 
+            . . f 7 7 7 7 6 c 7 7 6 f c . . 
+            . . . f c c c c 7 7 6 f 7 7 c . 
+            . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
+            . c 7 7 2 7 7 c f c 6 7 7 6 c c 
+            c 1 1 1 1 7 6 f c c 6 6 6 c . . 
+            f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
+            f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
+            . f 6 1 1 1 1 1 1 6 6 6 f . . . 
+            . . c c c c c c c c c f . . . . 
+            `, SpriteKind.NPC)
+        tiles.placeOnRandomTile(mySprite10, myTiles.tile7)
+        animation.runImageAnimation(
+        mySprite10,
+        [img`
+            . . . . c c c c c c . . . . . . 
+            . . . c 6 7 7 7 7 6 c . . . . . 
+            . . c 7 7 7 7 7 7 7 7 c . . . . 
+            . c 6 7 7 7 7 7 7 7 7 6 c . . . 
+            . c 7 c 6 6 6 6 c 7 7 7 c . . . 
+            . f 7 6 f 6 6 f 6 7 7 7 f . . . 
+            . f 7 7 7 7 7 7 7 7 7 7 f . . . 
+            . . f 7 7 7 7 6 c 7 7 6 f c . . 
+            . . . f c c c c 7 7 6 f 7 7 c . 
+            . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
+            . c 7 7 2 7 7 c f c 6 7 7 6 c c 
+            c 1 1 1 1 7 6 f c c 6 6 6 c . . 
+            f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
+            f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
+            . f 6 1 1 1 1 1 1 6 6 6 f . . . 
+            . . c c c c c c c c c f . . . . 
+            `,img`
+            . . . c c c c c c . . . . . . . 
+            . . c 6 7 7 7 7 6 c . . . . . . 
+            . c 7 7 7 7 7 7 7 7 c . . . . . 
+            c 6 7 7 7 7 7 7 7 7 6 c . . . . 
+            c 7 c 6 6 6 6 c 7 7 7 c . . . . 
+            f 7 6 f 6 6 f 6 7 7 7 f . . . . 
+            f 7 7 7 7 7 7 7 7 7 7 f . . . . 
+            . f 7 7 7 7 6 c 7 7 6 f . . . . 
+            . . f c c c c 7 7 6 f c c c . . 
+            . . c 6 2 7 7 7 f c c 7 7 7 c . 
+            . c 6 7 7 2 7 7 c f 6 7 7 7 7 c 
+            . c 1 1 1 1 7 6 6 c 6 6 6 c c c 
+            . c 1 1 1 1 1 6 6 6 6 6 6 c . . 
+            . c 6 1 1 1 1 1 6 6 6 6 6 c . . 
+            . . c 6 1 1 1 1 1 7 6 6 c c . . 
+            . . . c c c c c c c c c c . . . 
+            `],
+        100,
+        true
+        )
+        mySprite.setPosition(125, 230)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorClosedSouth, function (sprite, location) {
@@ -544,7 +546,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorClosedSouth, function
         500,
         true
         )
-        tiles.placeOnRandomTile(mySprite2, sprites.castle.tilePath5)
+        tiles.placeOnTile(mySprite2, tiles.getTileLocation(2, 8))
         mySprite4 = sprites.create(img`
             . . . . . . 5 . 5 . . . . . . . 
             . . . . . f 5 5 5 f f . . . . . 
@@ -620,6 +622,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorClosedSouth, function
         500,
         true
         )
+        tiles.placeOnTile(mySprite4, tiles.getTileLocation(4, 2))
     }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.forestTiles11, function (sprite, location) {
@@ -654,6 +657,17 @@ scene.onOverlapTile(SpriteKind.Player, sprites.builtin.forestTiles11, function (
             `, SpriteKind.NPC)
         tiles.placeOnRandomTile(mySprite3, sprites.dungeon.darkGroundCenter)
         mySprite.setPosition(200, 230)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, myTiles.tile3, function (sprite, location) {
+    if (level == 2) {
+        tiles.setCurrentTilemap(maps[7])
+        level = 7
+        mySprite7 = sprites.create(assets.image`myImage`, SpriteKind.NPC)
+        tiles.placeOnRandomTile(mySprite7, sprites.builtin.brick)
+        mySprite11 = sprites.create(assets.image`myImage0`, SpriteKind.NPC)
+        tiles.placeOnRandomTile(mySprite11, sprites.builtin.brick)
+        mySprite.setPosition(125, 230)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.darkGroundNorth, function (sprite, location) {
@@ -847,7 +861,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.tilePath8, function (sprit
         500,
         true
         )
-        tiles.placeOnRandomTile(mySprite2, sprites.castle.tilePath5)
+        tiles.placeOnTile(mySprite2, tiles.getTileLocation(2, 8))
         mySprite4 = sprites.create(img`
             . . . . . . 5 . 5 . . . . . . . 
             . . . . . f 5 5 5 f f . . . . . 
@@ -923,7 +937,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.tilePath8, function (sprit
         500,
         true
         )
-        tiles.placeOnRandomTile(mySprite4, sprites.castle.tilePath5)
+        tiles.placeOnTile(mySprite4, tiles.getTileLocation(4, 2))
     }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.stairLarge, function (sprite, location) {
@@ -1031,7 +1045,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorOpenNorth, function (
         500,
         true
         )
-        tiles.placeOnRandomTile(mySprite2, sprites.castle.tilePath5)
+        tiles.placeOnTile(mySprite2, tiles.getTileLocation(2, 8))
         mySprite4 = sprites.create(img`
             . . . . . . 5 . 5 . . . . . . . 
             . . . . . f 5 5 5 f f . . . . . 
@@ -1049,7 +1063,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorOpenNorth, function (
             . . . f 3 3 5 3 3 5 3 3 f . . . 
             . . . f f f f f f f f f f . . . 
             . . . . . f f . . f f . . . . . 
-            `, SpriteKind.Player)
+            `, SpriteKind.NPC)
         animation.runImageAnimation(
         mySprite4,
         [img`
@@ -1107,22 +1121,34 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.doorOpenNorth, function (
         500,
         true
         )
-        tiles.placeOnRandomTile(mySprite4, sprites.castle.tilePath5)
-        tiles.placeOnRandomTile(mySprite4, sprites.castle.tilePath5)
+        tiles.placeOnTile(mySprite4, tiles.getTileLocation(4, 2))
         mySprite12 = sprites.create(assets.image`Monster`, SpriteKind.Enemy)
-        tiles.placeOnRandomTile(mySprite12, sprites.dungeon.darkGroundCenter)
+        tiles.placeOnTile(mySprite12, tiles.getTileLocation(27, 6))
+        mySprite12.setVelocity(randint(25, 50), randint(25, 50))
+        mySprite12.setBounceOnWall(true)
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    if (is_player_invincible == false) {
+        statusbar.value += -5
+        is_player_invincible = true
+        timer.after(100, function () {
+            is_player_invincible = false
+        })
     }
 })
 let mySprite12: Sprite = null
+let mySprite11: Sprite = null
 let mySprite10: Sprite = null
 let mySprite9: Sprite = null
 let mySprite8: Sprite = null
+let mySprite7: Sprite = null
 let mySprite6: Sprite = null
 let mySprite3: Sprite = null
-let mySprite11: Sprite = null
-let mySprite7: Sprite = null
 let mySprite4: Sprite = null
 let mySprite2: Sprite = null
+let is_player_invincible = false
+let statusbar: StatusBarSprite = null
 let level = 0
 let mySprite5: Sprite = null
 let mySprite: Sprite = null
@@ -1170,6 +1196,9 @@ scene.cameraFollowSprite(mySprite)
 mySprite5.setPosition(40, 50)
 tiles.setCurrentTilemap(tilemap`level3 aka starting house`)
 level = 3
+statusbar = statusbars.create(30, 4, StatusBarKind.Health)
+statusbar.attachToSprite(mySprite)
+is_player_invincible = false
 game.onUpdate(function () {
     if (level != 0) {
         sprites.destroy(mySprite2)
