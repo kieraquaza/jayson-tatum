@@ -258,6 +258,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         Storage += -1
         statusbar.value += 15
     }
+    if (Storage == 0 && mySprite.overlapsWith(mySprite13) == false) {
+        statusbar.value += 0
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
     if (level == 0) {
@@ -1207,6 +1210,7 @@ let mySprite11: Sprite = null
 let mySprite7: Sprite = null
 let mySprite4: Sprite = null
 let mySprite2: Sprite = null
+let Storage = 0
 let is_player_invincible = false
 let statusbar: StatusBarSprite = null
 let level = 0
@@ -1260,7 +1264,7 @@ statusbar = statusbars.create(30, 4, StatusBarKind.Health)
 statusbar.attachToSprite(mySprite, 0, 0)
 is_player_invincible = false
 let swing_sword = 0
-let Storage = 0
+Storage = 0
 game.onUpdate(function () {
     if (level != 0) {
         sprites.destroy(mySprite2)
